@@ -206,6 +206,40 @@ public class Path
         }
     }
 
+    public Vector2[] CalculateEvenlySpacedPoints(float spacing, float resolution = 1)
+    {
+        List<Vector2> evenlySpacePoints = new List<Vector2>();
+        evenlySpacePoints.Add(points[0]);
+        Vector2 previousPoint = points[0];
+        float distanceSinceLastEvenPoint = 0;
+
+        for(int segIndex = 0; segIndex < NumSegments; segIndex++)
+        {
+            Vector2[] p = GetPointInSegment(segIndex);
+            float controlNetLength = Vector2.Distance(p[0], p[1]) + Vector2.Distance(p[1], p[2]) + Vector2.Distance(p[2], p[3]);
+            float estimatedCurveLength = Vector2.Distance(p[0], p[3]) + controlNetLength / 2f;
+            int divisions = Mathf.CeilToInt(estimatedCurveLength * resolution * 10);
+            float t = 0;
+            while(t <= 1)
+            {
+                t += 1f / divisions;
+                Vector2 pointOnCurve = Bezier.EvaluateCubic(p[0], p[1], p[2], p[3], t);
+                distanceSinceLastEvenPoint += Vector2.Distance(previousPoint, pointOnCurve);
+
+                while (distanceSinceLastEvenPoint >= spacing)
+                {
+                    float overshootDistance = distanceSinceLastEvenPoint - spacing;
+                    Vector2 newEvenlySpacedPoint = pointOnCurve + (previousPoint - pointOnCurve).normalized * overshootDistance;
+                    evenlySpacePoints.Add(newEvenlySpacedPoint);
+                    distanceSinceLastEvenPoint = overshootDistance;
+                    previousPoint = newEvenlySpacedPoint;
+                }
+                previousPoint = pointOnCurve;
+            }
+        }
+        return evenlySpacePoints.ToArray();
+    }
+
     void AutoSetAllAffectedControlPoints(int updatedAnchorIndex)
     {
         for(int i = updatedAnchorIndex - 3; i <= updatedAnchorIndex + 3; i += 3)
