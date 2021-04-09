@@ -10,6 +10,8 @@ public enum GameState { gameMenu, gamePlay, gamePause }
 
 public class GameManager : Manager<GameManager>
 {
+
+    private List<GameObject> balls = new List<GameObject>();
     //Game State
     private GameState m_GameState;
     public bool IsPlaying { get { return m_GameState == GameState.gamePlay; } }
@@ -59,7 +61,7 @@ public class GameManager : Manager<GameManager>
 
     private void MainMenuButtonClicked(MainMenuButtonClickedEvent e)
     {
-        SceneManager.LoadScene("Level_one");
+        SceneManager.LoadScene("zuma");
     }
 
     private void PlayButtonClicked(PlayButtonClickedEvent e)
