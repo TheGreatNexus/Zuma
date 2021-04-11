@@ -16,7 +16,7 @@ public class ballSpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     GameObject ball;
     void Start()
-    {Debug.Log("test");
+    {
         m_CurveOriginPos = GameObject.Find("Lvl 1 - 1").GetComponent<PathCreator>().path[0];
         int random = Random.Range(1, 5);
         switch (random)

@@ -92,6 +92,7 @@ public class PlayerControler : MonoBehaviour
     void ClickedAction()
     {
         ballToShoot.AddComponent<Collider>();
+        ballToShoot.GetComponent<Collider>().setPrefabs(RedBall,BlueBall,YellowBall,GreenBall);
         ballToShoot = reloadBall;
         int random = Random.Range(1, 5);
         switch (random)
