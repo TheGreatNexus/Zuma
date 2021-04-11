@@ -27,7 +27,7 @@ public class ballMovement : MonoBehaviour
     {
         if(this.tag == "headBall" && pathIndex <= pathCurve.Count)
         {
-            this.transform.DOMove((points[pathIndex]), 1);
+            this.transform.DOMove((points[pathIndex]), 5);
             if(Mathf.Round(this.transform.position.x) == Mathf.Round(points[pathIndex].x) && Mathf.Round(this.transform.position.y) == Mathf.Round(points[pathIndex].y)){ headPos++;}
         }
      //   Debug.Log("Point n° : " + (pathIndex + 1));

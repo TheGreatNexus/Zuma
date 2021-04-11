@@ -21,13 +21,6 @@ public class PathCreator : MonoBehaviour
         path = new Path(transform.position);
     }
 
-    public Path GetPath
-    {
-        get
-        {
-            return path;
-        }
-    }
     void Reset()
     {
         CreatePath();
