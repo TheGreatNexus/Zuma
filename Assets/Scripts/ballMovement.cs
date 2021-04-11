@@ -63,4 +63,12 @@ public class ballMovement : MonoBehaviour
         //Debug.Log("lol " + points[pathIndex + 1]);
 
     }
+
+    public void setHead(int head){
+        this.headPos = head;
+    }
+    public int getHead()
+    {
+        return this.headPos;
+    }
 }

@@ -32,17 +32,21 @@ public class Collider : MonoBehaviour
             ballList = GameManager.getBallList();
             if (other.transform.localPosition.y <= other.transform.InverseTransformPoint(this.transform.position).y)
             {
-                GameObject newBall = Instantiate(RedBall, new Vector3(other.transform.localPosition.x, other.transform.localPosition.y + 1, other.transform.localPosition.z), Quaternion.identity);
-                newBall.AddComponent<ballMovement>();
-                newBall.GetComponent<ballMovement>().color = "red";
+                Debug.Log(other.transform.InverseTransformPoint(this.transform.position).y);
+                Debug.Log(other.transform.localPosition.y);
+                GameObject newBall = Instantiate(RedBall, new Vector3(other.transform.localPosition.x, other.transform.localPosition.y, 0), Quaternion.identity);
+                other.transform.position += new Vector3(0, 0.25f, 0);
+                newBall.GetComponent<ballMovement>().setHead(other.GetComponent<ballMovement>().getHead() - 1);
                 asEnteredSmth = true;
+                Destroy(gameObject);
             }
             else if (other.transform.localPosition.y > other.transform.InverseTransformPoint(this.transform.position).y)
             {
-                GameObject newBall = Instantiate(RedBall, new Vector3(other.transform.localPosition.x, other.transform.localPosition.y - 1, other.transform.localPosition.z), Quaternion.identity);
-                newBall.AddComponent<ballMovement>();
-                newBall.GetComponent<ballMovement>().color = "red";
+                Debug.Log("coucou on est censé etre en dessous");
+                GameObject newBall = Instantiate(RedBall, new Vector3(0, other.transform.localPosition.y - .25f, 0), Quaternion.identity);
+                newBall.GetComponent<ballMovement>().setHead(other.GetComponent<ballMovement>().getHead() - 1);
                 asEnteredSmth = true;
+                Destroy(gameObject);
             }
         }
     }

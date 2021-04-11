@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
+    ballSpawnerScript prefabs;
     [SerializeField] GameObject RedBall;
     [SerializeField] GameObject YellowBall;
     [SerializeField] GameObject GreenBall;
@@ -20,6 +21,7 @@ public class PlayerControler : MonoBehaviour
 
     void Start()
     {
+        prefabs = GameObject.Find("Spawner").GetComponent<ballSpawnerScript>();
         ballToShootPos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y - 1, 0);
         reloadBallPos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y + 1, 0);
         target = this.transform;
@@ -92,7 +94,7 @@ public class PlayerControler : MonoBehaviour
     void ClickedAction()
     {
         ballToShoot.AddComponent<Collider>();
-        ballToShoot.GetComponent<Collider>().setPrefabs(RedBall,BlueBall,YellowBall,GreenBall);
+        ballToShoot.GetComponent<Collider>().setPrefabs(prefabs.redPrefabs(),prefabs.bluePrefabs(),prefabs.yellowPrefabs(),prefabs.greenPrefabs());
         ballToShoot = reloadBall;
         int random = Random.Range(1, 5);
         switch (random)
@@ -111,5 +113,5 @@ public class PlayerControler : MonoBehaviour
                 break;
         }
     }
-
+    
 }
