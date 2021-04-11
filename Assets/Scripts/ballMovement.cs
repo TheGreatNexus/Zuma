@@ -29,6 +29,8 @@ public class ballMovement : MonoBehaviour
             Vector3 directionToMove = target - transform.position;
             directionToMove = directionToMove.normalized * Time.deltaTime * 0.5f;
             transform.position = transform.position + directionToMove;
+            float zRotation = Mathf.Atan2(directionToMove.y, directionToMove.x) * Mathf.Rad2Deg + 90.0f;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, zRotation));
             if (Mathf.Round(this.transform.position.x) == Mathf.Round(points[pathIndex].x) && Mathf.Round(this.transform.position.y) == Mathf.Round(points[pathIndex].y)) { headPos++; }
         }
         // else if (pathIndex <= pathCurve.Count)
