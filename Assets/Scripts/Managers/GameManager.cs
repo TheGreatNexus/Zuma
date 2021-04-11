@@ -11,7 +11,7 @@ public enum GameState { gameMenu, gamePlay, gamePause }
 public class GameManager : Manager<GameManager>
 {
 
-    private List<GameObject> ballList = new List<GameObject>();
+    private static List<GameObject> ballList = new List<GameObject>();
     //Game State
     private GameState m_GameState;
     public bool IsPlaying { get { return m_GameState == GameState.gamePlay; } }
@@ -140,5 +140,8 @@ public class GameManager : Manager<GameManager>
     private void BallHasBeenAddedToQueue(BallHasBeenAddedToQueueEvent e)
     {
         ballList.Add(e.ball);
+    }
+    public static List<GameObject> getBallList(){
+        return ballList;
     }
 }
