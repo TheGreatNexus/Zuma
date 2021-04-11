@@ -54,7 +54,7 @@ public class GameManager : Manager<GameManager>
     #region Manager implementation
     protected override IEnumerator InitCoroutine()
     {
-        Menu();
+        Play();
         yield break;
     }
     #endregion

@@ -5,8 +5,6 @@ using SDD.Events;
 
 public class ballSpawnerScript : MonoBehaviour
 {
-    List<Vector2> pointList = new List<Vector2>();
-    Vector2[] points;
     Vector2 m_CurveOriginPos;
     public int ballCount;
     [SerializeField] GameObject RedBall;
@@ -18,12 +16,7 @@ public class ballSpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     GameObject ball;
     void Start()
-    {
-            points = GameObject.Find("Lvl 1 - 1").GetComponent<PathCreator>().path.CalculateEvenlySpacedPoints(0.5f,1f);
-            foreach (var point in points)
-            {
-                pointList.Add(point);
-            }
+    {Debug.Log("test");
         m_CurveOriginPos = GameObject.Find("Lvl 1 - 1").GetComponent<PathCreator>().path[0];
         int random = Random.Range(1, 5);
         switch (random)
@@ -40,10 +33,8 @@ public class ballSpawnerScript : MonoBehaviour
             case 4:
                 ball = Instantiate(BlueBall, m_CurveOriginPos, Quaternion.identity);
                 break;
-            default:
-                ball = Instantiate(RedBall, m_CurveOriginPos, Quaternion.identity);
-                break;
         }
+        ball.tag = "headBall";
         EventManager.Instance.Raise(new BallHasBeenAddedToQueueEvent() { ball = ball });
         spawnAllBalls();
     }

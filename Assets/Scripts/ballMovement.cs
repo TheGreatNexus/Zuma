@@ -25,15 +25,10 @@ public class ballMovement : MonoBehaviour
 
     private void MoveHead(int pathIndex)
     {
-        if(this.tag == "head" && pathIndex <= pathCurve.Count)
+        if(this.tag == "headBall" && pathIndex <= pathCurve.Count)
         {
-            transform.DOMoveX((points[pathIndex + 1].x), 1);
-            transform.DOMoveX((points[pathIndex + 1].y), 1);
-            headPos++;
-        }
-        else if(pathIndex <= pathCurve.Count)
-        {
-            headPos++;
+            this.transform.DOMove((points[pathIndex]), 1);
+            if(Mathf.Round(this.transform.position.x) == Mathf.Round(points[pathIndex].x) && Mathf.Round(this.transform.position.y) == Mathf.Round(points[pathIndex].y)){ headPos++;}
         }
      //   Debug.Log("Point n° : " + (pathIndex + 1));
      //  Debug.Log("Pos X : " + points[pathIndex + 1].x);
