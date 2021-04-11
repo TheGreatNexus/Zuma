@@ -54,62 +54,62 @@ public class ballSpawnerScript : MonoBehaviour
                 case "red":
                     if (random <= 7)
                     {
-                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 8)
                     {
-                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 9)
                     {
-                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
-                    else { ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+                    else { ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break; }
 
                 case "yellow":
                     if (random <= 7)
                     {
-                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 8)
                     {
-                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 9)
                     {
-                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
-                    else { ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+                    else { ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break; }
 
                 case "green":
                     if (random <= 7)
                     {
-                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 8)
                     {
-                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 9)
                     {
-                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
-                    else { ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+                    else { ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break; }
 
                 case "blue":
                     if (random <= 7)
                     {
-                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 8)
                     {
-                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
                     else if (random == 9)
                     {
-                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break;
                     }
-                    else { ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+                    else { ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .75f, 0), Quaternion.identity); break; }
             }
             EventManager.Instance.Raise(new BallHasBeenAddedToQueueEvent() { ball = ball });
         }
