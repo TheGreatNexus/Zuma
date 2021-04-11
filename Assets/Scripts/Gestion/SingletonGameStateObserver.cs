@@ -12,9 +12,11 @@ public abstract class SingletonGameStateObserver<T> : Singleton<T>, IEventHandle
 		EventManager.Instance.AddListener<GameMenuEvent>(GameMenu);
 		EventManager.Instance.AddListener<GamePlayEvent>(GamePlay);
 		EventManager.Instance.AddListener<GameQuitEvent>(GameQuit);
-		//EventManager.Instance.AddListener<GameOverEvent>(GameOver);
+		EventManager.Instance.AddListener<GameOverEvent>(GameOver);
+		EventManager.Instance.AddListener<GameVictoryEvent>(GameVictory);
 		EventManager.Instance.AddListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.AddListener<GameResumeEvent>(GameResume);
+		EventManager.Instance.AddListener<GameStatisticsChangedEvent>(GameStatisticsChanged);
 	}
 
 	public virtual void UnsubscribeEvents()
@@ -22,9 +24,11 @@ public abstract class SingletonGameStateObserver<T> : Singleton<T>, IEventHandle
 		EventManager.Instance.RemoveListener<GameMenuEvent>(GameMenu);
 		EventManager.Instance.RemoveListener<GamePlayEvent>(GamePlay);
 		EventManager.Instance.RemoveListener<GameQuitEvent>(GameQuit);
-	//	EventManager.Instance.RemoveListener<GameOverEvent>(GameOver);
+		EventManager.Instance.RemoveListener<GameOverEvent>(GameOver);
+		EventManager.Instance.RemoveListener<GameVictoryEvent>(GameVictory);
 		EventManager.Instance.RemoveListener<GamePauseEvent>(GamePause);
 		EventManager.Instance.RemoveListener<GameResumeEvent>(GameResume);
+		EventManager.Instance.RemoveListener<GameStatisticsChangedEvent>(GameStatisticsChanged);
 	}
 
 	protected override void Awake()
@@ -49,6 +53,9 @@ public abstract class SingletonGameStateObserver<T> : Singleton<T>, IEventHandle
 	protected virtual void GameOver(GameOverEvent e)
 	{
 	}
+	protected virtual void GameVictory(GameVictoryEvent e)
+	{
+	}
 	protected virtual void GameQuit(GameQuitEvent e)
 	{
 	}
@@ -61,8 +68,8 @@ public abstract class SingletonGameStateObserver<T> : Singleton<T>, IEventHandle
 	{
 	}
 
-/*	protected virtual void GameStatisticsChanged(GameStatisticsChangedEvent e)
+	protected virtual void GameStatisticsChanged(GameStatisticsChangedEvent e)
 	{
-	}*/
+	}
 	#endregion
 }
