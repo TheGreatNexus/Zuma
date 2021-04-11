@@ -11,7 +11,7 @@ public enum GameState { gameMenu, gamePlay, gamePause }
 public class GameManager : Manager<GameManager>
 {
 
-    private List<GameObject> balls = new List<GameObject>();
+    private List<GameObject> ballList = new List<GameObject>();
     //Game State
     private GameState m_GameState;
     public bool IsPlaying { get { return m_GameState == GameState.gamePlay; } }
@@ -35,6 +35,7 @@ public class GameManager : Manager<GameManager>
         EventManager.Instance.AddListener<QuitButtonClickedEvent>(QuitButtonClicked);
         EventManager.Instance.AddListener<ResumeButtonClickedEvent>(ResumeButtonClicked);
         EventManager.Instance.AddListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
+        EventManager.Instance.AddListener<BallHasBeenAddedToQueueEvent>(BallHasBeenAddedToQueue);
     }
 
     public override void UnsubscribeEvents()
@@ -46,6 +47,7 @@ public class GameManager : Manager<GameManager>
         EventManager.Instance.RemoveListener<QuitButtonClickedEvent>(QuitButtonClicked);
         EventManager.Instance.RemoveListener<ResumeButtonClickedEvent>(ResumeButtonClicked);
         EventManager.Instance.RemoveListener<EscapeButtonClickedEvent>(EscapeButtonClicked);
+        EventManager.Instance.RemoveListener<BallHasBeenAddedToQueueEvent>(BallHasBeenAddedToQueue);
     }
     #endregion
 
@@ -134,5 +136,9 @@ public class GameManager : Manager<GameManager>
     private void InitNewGame()
     {
         // a faire
+    }
+    private void BallHasBeenAddedToQueue(BallHasBeenAddedToQueueEvent e)
+    {
+        ballList.Add(e.ball);
     }
 }
