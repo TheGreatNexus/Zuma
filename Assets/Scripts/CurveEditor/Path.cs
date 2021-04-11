@@ -301,11 +301,6 @@ public class Path
         }
     }
 
-    public List<Vector2> Getlist()
-    {
-        return this.points;
-    }
-
     int LoopIndex(int index)
     {
         return((index + points.Count) % points.Count);
