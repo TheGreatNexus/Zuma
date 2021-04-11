@@ -40,5 +40,9 @@ public class ResumeButtonClickedEvent : SDD.Events.Event
 public class MainMenuButtonClickedEvent : SDD.Events.Event
 {
 }
+public class BallHasBeenAddedToQueueEvent : SDD.Events.Event
+{
+    public GameObject ball { get; set; }
+}
 
 #endregion

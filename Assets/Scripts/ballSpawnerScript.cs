@@ -5,121 +5,121 @@ using SDD.Events;
 
 public class ballSpawnerScript : MonoBehaviour
 {
+    List<Vector2> pointList = new List<Vector2>();
+    Vector2[] points;
+    Vector2 m_CurveOriginPos;
+    public int ballCount;
     [SerializeField] GameObject RedBall;
     [SerializeField] GameObject YellowBall;
     [SerializeField] GameObject GreenBall;
     [SerializeField] GameObject BlueBall;
     // Start is called before the first frame update
+    GameObject ball;
     void Start()
     {
+            points = GameObject.Find("Lvl 1 - 1").GetComponent<PathCreator>().path.CalculateEvenlySpacedPoints(0.5f,1f);
+            foreach (var point in points)
+            {
+                pointList.Add(point);
+            }
+        m_CurveOriginPos = GameObject.Find("Lvl 1 - 1").GetComponent<PathCreator>().path[0];
         int random = Random.Range(1, 5);
         switch (random)
         {
             case 1:
-                Instantiate(RedBall, this.transform.position, Quaternion.identity);
+                ball = Instantiate(RedBall, m_CurveOriginPos, Quaternion.identity);
                 break;
             case 2:
-                Instantiate(YellowBall, this.transform.position, Quaternion.identity);
+                ball = Instantiate(YellowBall, m_CurveOriginPos, Quaternion.identity);
                 break;
             case 3:
-                Instantiate(GreenBall, this.transform.position, Quaternion.identity);
+                ball = Instantiate(GreenBall, m_CurveOriginPos, Quaternion.identity);
                 break;
             case 4:
-                Instantiate(BlueBall, this.transform.position, Quaternion.identity);
+                ball = Instantiate(BlueBall, m_CurveOriginPos, Quaternion.identity);
                 break;
             default:
-                Instantiate(RedBall, this.transform.position, Quaternion.identity);
+                ball = Instantiate(RedBall, m_CurveOriginPos, Quaternion.identity);
                 break;
         }
+        EventManager.Instance.Raise(new BallHasBeenAddedToQueueEvent() { ball = ball });
+        spawnAllBalls();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        Debug.Log("here");
-    }
-    void OnTriggerExit2D(Collider2D other)
-    {
-        Debug.Log("exited");
-        string color = other.GetComponent<ballMovement>().color;
-        int random = Random.Range(0, 11);
-        if (random <= 7)
+    private void spawnAllBalls(){
+        for (int i = 0; i < ballCount - 1; i++)
         {
-            switch (color)
+            int random = Random.Range(1, 11);
+            switch (ball.GetComponent<ballMovement>().color)
             {
                 case "red":
-                    Instantiate(RedBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "blue":
-                    Instantiate(BlueBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "yellow":
-                    Instantiate(YellowBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "green":
-                    Instantiate(GreenBall, this.transform.position, Quaternion.identity);
-                    break;
-            }
-        }
-        if (random == 8)
-        {
-            switch (color)
-            {
-                case "red":
-                    Instantiate(YellowBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "blue":
-                    Instantiate(RedBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "yellow":
-                    Instantiate(GreenBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "green":
-                    Instantiate(BlueBall, this.transform.position, Quaternion.identity);
-                    break;
-            }
-        }
-        if (random == 9)
-        {
-            switch (color)
-            {
-                case "red":
-                    Instantiate(GreenBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "blue":
-                    Instantiate(YellowBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "yellow":
-                    Instantiate(BlueBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "green":
-                    Instantiate(RedBall, this.transform.position, Quaternion.identity);
-                    break;
-            }
-        }
-        if (random == 10)
-        {
-            switch (color)
-            {
-                case "red":
-                    Instantiate(BlueBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "blue":
-                    Instantiate(GreenBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "yellow":
-                    Instantiate(RedBall, this.transform.position, Quaternion.identity);
-                    break;
-                case "green":
-                    Instantiate(YellowBall, this.transform.position, Quaternion.identity);
-                    break;
-            }
-        }
+                    if (random <= 7)
+                    {
+                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 8)
+                    {
+                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 9)
+                    {
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else { ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
 
+                case "yellow":
+                    if (random <= 7)
+                    {
+                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 8)
+                    {
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 9)
+                    {
+                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else { ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+
+                case "green":
+                    if (random <= 7)
+                    {
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 8)
+                    {
+                        ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 9)
+                    {
+                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else { ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+
+                case "blue":
+                    if (random <= 7)
+                    {
+                        ball = Instantiate(RedBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 8)
+                    {
+                        ball = Instantiate(YellowBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else if (random == 9)
+                    {
+                        ball = Instantiate(GreenBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break;
+                    }
+                    else { ball = Instantiate(BlueBall, ball.transform.position + new Vector3(0, .5f, 0), Quaternion.identity); break; }
+            }
+            EventManager.Instance.Raise(new BallHasBeenAddedToQueueEvent() { ball = ball });
+        }
     }
+
 }
